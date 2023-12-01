@@ -1,0 +1,150 @@
+<div>
+  <div>
+    <h1>
+      List of all days
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new day
+    </h2>
+
+    <form action="/insert_day" method="post">
+      <div>
+        <label for="trip_id_box">
+          Trip
+        </label>
+
+        <input type="text" id="trip_id_box" name="query_trip_id">
+      </div>
+
+      <div>
+        <label for="date_box">
+          Date
+        </label>
+
+        <input type="date" id="date_box" name="query_date">
+      </div>
+
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      <div>
+        <label for="lodging_box">
+          Lodging
+        </label>
+
+        <input type="text" id="lodging_box" name="query_lodging">
+      </div>
+
+      <div>
+        <label for="events_count_box">
+          Events count
+        </label>
+
+        <input type="text" id="events_count_box" name="query_events_count">
+      </div>
+
+      <button>
+        Create day
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Trip
+        </th>
+
+        <th>
+          Date
+        </th>
+
+        <th>
+          Name
+        </th>
+
+        <th>
+          Lodging
+        </th>
+
+        <th>
+          Events count
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_days.each do |a_day| %>
+      <tr>
+        <td>
+          <%= a_day.id %>
+        </td>
+
+        <td>
+          <%= a_day.trip_id %>
+        </td>
+
+        <td>
+          <%= a_day.date %>
+        </td>
+
+        <td>
+          <%= a_day.name %>
+        </td>
+
+        <td>
+          <%= a_day.lodging %>
+        </td>
+
+        <td>
+          <%= a_day.events_count %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_day.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_day.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/days/<%= a_day.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

@@ -1,0 +1,131 @@
+<div>
+  <div>
+    <h1>
+      Day #<%= @the_day.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/days">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_day/<%= @the_day.id %>">
+          Delete day
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Trip
+      </dt>
+      <dd>
+        <%= @the_day.trip_id %>
+      </dd>
+
+      <dt>
+        Date
+      </dt>
+      <dd>
+        <%= @the_day.date %>
+      </dd>
+
+      <dt>
+        Name
+      </dt>
+      <dd>
+        <%= @the_day.name %>
+      </dd>
+
+      <dt>
+        Lodging
+      </dt>
+      <dd>
+        <%= @the_day.lodging %>
+      </dd>
+
+      <dt>
+        Events count
+      </dt>
+      <dd>
+        <%= @the_day.events_count %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_day.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_day.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit day
+    </h2>
+
+    <form action="/modify_day/<%= @the_day.id %>"  method="post" >
+      <div>
+        <label for="trip_id_box">
+          Trip
+        </label>
+
+        <input type="text" id="trip_id_box" name="query_trip_id" value="<%= @the_day.trip_id %>">
+      </div>
+
+      <div>
+        <label for="date_box">
+          Date
+        </label>
+
+        <input type="date" id="date_box" name="query_date" value="<%= @the_day.date %>">
+      </div>
+
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name" value="<%= @the_day.name %>">
+      </div>
+
+      <div>
+        <label for="lodging_box">
+          Lodging
+        </label>
+
+        <input type="text" id="lodging_box" name="query_lodging" value="<%= @the_day.lodging %>">
+      </div>
+
+      <div>
+        <label for="events_count_box">
+          Events count
+        </label>
+
+        <input type="text" id="events_count_box" name="query_events_count" value="<%= @the_day.events_count %>">
+      </div>
+
+      <button>
+        Update day
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
