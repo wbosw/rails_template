@@ -1,0 +1,176 @@
+<div>
+  <div>
+    <h1>
+      Trip #<%= @the_trip.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/trips">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_trip/<%= @the_trip.id %>">
+          Delete trip
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        City
+      </dt>
+      <dd>
+        <%= @the_trip.city %>
+      </dd>
+
+      <dt>
+        User
+      </dt>
+      <dd>
+        <%= @the_trip.user_id %>
+      </dd>
+
+      <dt>
+        Public rating
+      </dt>
+      <dd>
+        <%= @the_trip.public_rating %>
+      </dd>
+
+      <dt>
+        Private
+      </dt>
+      <dd>
+        <%= @the_trip.private %>
+      </dd>
+
+      <dt>
+        User rating
+      </dt>
+      <dd>
+        <%= @the_trip.user_rating %>
+      </dd>
+
+      <dt>
+        Days count
+      </dt>
+      <dd>
+        <%= @the_trip.days_count %>
+      </dd>
+
+      <dt>
+        Events count
+      </dt>
+      <dd>
+        <%= @the_trip.events_count %>
+      </dd>
+
+      <dt>
+        Ratings count
+      </dt>
+      <dd>
+        <%= @the_trip.ratings_count %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_trip.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_trip.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit trip
+    </h2>
+
+    <form action="/modify_trip/<%= @the_trip.id %>"  method="post" >
+      <div>
+        <label for="city_box">
+          City
+        </label>
+
+        <input type="text" id="city_box" name="query_city" value="<%= @the_trip.city %>">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_trip.user_id %>">
+      </div>
+
+      <div>
+        <label for="public_rating_box">
+          Public rating
+        </label>
+
+        <input type="text" id="public_rating_box" name="query_public_rating" value="<%= @the_trip.public_rating %>">
+      </div>
+
+      <div>
+        <input type="checkbox" id="private_box" name="query_private" value="1" <%= "checked" if @the_trip.private %>>
+
+        <label for="private_box">
+            Private
+        </label>
+      </div>
+
+      <div>
+        <label for="user_rating_box">
+          User rating
+        </label>
+
+        <input type="text" id="user_rating_box" name="query_user_rating" value="<%= @the_trip.user_rating %>">
+      </div>
+
+      <div>
+        <label for="days_count_box">
+          Days count
+        </label>
+
+        <input type="text" id="days_count_box" name="query_days_count" value="<%= @the_trip.days_count %>">
+      </div>
+
+      <div>
+        <label for="events_count_box">
+          Events count
+        </label>
+
+        <input type="text" id="events_count_box" name="query_events_count" value="<%= @the_trip.events_count %>">
+      </div>
+
+      <div>
+        <label for="ratings_count_box">
+          Ratings count
+        </label>
+
+        <input type="text" id="ratings_count_box" name="query_ratings_count" value="<%= @the_trip.ratings_count %>">
+      </div>
+
+      <button>
+        Update trip
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

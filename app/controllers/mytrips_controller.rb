@@ -1,10 +1,10 @@
-class TripsController < ApplicationController
+class MytripsController < ApplicationController
   def index
     matching_trips = Trip.all
 
     @list_of_trips = matching_trips.order({ :created_at => :desc })
 
-    render({ :template => "trips/index" })
+    render({ :template => "mytrips/index" })
   end
 
   def show
@@ -14,14 +14,13 @@ class TripsController < ApplicationController
 
     @the_trip = matching_trips.at(0)
 
-    render({ :template => "trips/show" })
+    render({ :template => "mytrips/show" })
   end
 
   def create
     the_trip = Trip.new
     the_trip.city = params.fetch("query_city")
     the_trip.user_id = params.fetch("query_user_id")
-    
 
     if the_trip.valid?
       the_trip.save
@@ -61,3 +60,4 @@ class TripsController < ApplicationController
     redirect_to("/trips", { :notice => "Trip deleted successfully."} )
   end
 end
+

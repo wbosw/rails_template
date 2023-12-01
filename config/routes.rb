@@ -6,9 +6,9 @@ Rails.application.routes.draw do
   # Routes for "My Trips" Trip resource:
 
   # READ
-  get("/trips", { :controller => "trips", :action => "index" })
+  get("/my_trips", { :controller => "mytrips", :action => "index" })
   
-  get("/trips/:path_id", { :controller => "trips", :action => "show" })
+  get("/my_trips/:path_id", { :controller => "mytrips", :action => "show" })
 
   # CREATE
   post("/insert_trip", { :controller => "trips", :action => "create" })

@@ -1,0 +1,159 @@
+<div>
+  <div>
+    <h1>
+      My Trips
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new trip
+    </h2>
+
+    <form action="/insert_trip" method="post">
+      <div>
+        <label for="city_box">
+          City
+        </label>
+
+        <input type="text" id="city_box" name="query_city">
+      </div>
+
+      <div>
+        <label for="user_id_box">
+          User
+        </label>
+
+        <input type="text" id="user_id_box" name="query_user_id" value="<%= current_user.id %>">
+      </div>
+
+  
+
+      <div>
+        <input type="checkbox" id="private_box" name="query_private" value="1">
+
+        <label for="private_box">Private</label>
+      </div>
+
+
+      <button>
+        Create trip
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          City
+        </th>
+
+        <th>
+          User
+        </th>
+
+        <th>
+          Public rating
+        </th>
+
+        <th>
+          Private
+        </th>
+
+        <th>
+          User rating
+        </th>
+
+        <th>
+          Days count
+        </th>
+
+        <th>
+          Events count
+        </th>
+
+        <th>
+          Ratings count
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_trips.where( :user_id => current_user.id ).each do |a_trip| %>
+      <tr>
+        <td>
+          <%= a_trip.id %>
+        </td>
+
+        <td>
+          <%= a_trip.city %>
+        </td>
+
+        <td>
+          <%= a_trip.user_id %>
+        </td>
+
+        <td>
+          <%= a_trip.public_rating %>
+        </td>
+
+        <td>
+          <%= a_trip.private %>
+        </td>
+
+        <td>
+          <%= a_trip.user_rating %>
+        </td>
+
+        <td>
+          <%= a_trip.days_count %>
+        </td>
+
+        <td>
+          <%= a_trip.events_count %>
+        </td>
+
+        <td>
+          <%= a_trip.ratings_count %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_trip.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_trip.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/trips/<%= a_trip.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
