@@ -3,11 +3,17 @@ Rails.application.routes.draw do
   root "trips#index"
 
 
-  # Routes for the Trip resource:
+  # Routes for "My Trips" Trip resource:
+
+  # READ
+  get("/trips", { :controller => "trips", :action => "index" })
+  
+  get("/trips/:path_id", { :controller => "trips", :action => "show" })
 
   # CREATE
   post("/insert_trip", { :controller => "trips", :action => "create" })
-          
+       
+  # Routes for the general public Trip resource:
   # READ
   get("/trips", { :controller => "trips", :action => "index" })
   
