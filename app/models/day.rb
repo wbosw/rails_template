@@ -12,4 +12,8 @@
 #  trip_id      :integer
 #
 class Day < ApplicationRecord
+  belongs_to :trip, required: true, class_name: "Trip", foreign_key: "trip_id", counter_cache: true
+
+  has_many  :events, class_name: "Event", foreign_key: "day_id", dependent: :destroy
+  
 end
