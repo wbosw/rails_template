@@ -28,7 +28,7 @@ class DaysController < ApplicationController
 
     if the_day.valid?
       the_day.save
-      redirect_to("/trips/:path_id/days", { :notice => "Day created successfully." })
+      redirect_to("/trips/#{@the_trip}/days", { :notice => "Day created successfully." })
     else
       redirect_to("/days", { :alert => the_day.errors.full_messages.to_sentence })
     end
