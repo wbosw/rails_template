@@ -1,11 +1,11 @@
 class DaysController < ApplicationController
-  def index
-    matching_days = Day.all
+  # def index
+  #   matching_days = Day.all
 
-    @list_of_days = matching_days.order({ :created_at => :desc })
+  #   @list_of_days = matching_days.order({ :created_at => :desc })
 
-    render({ :template => "days/index" })
-  end
+  #   render({ :template => "days/index" })
+  # end
 
   def show
     the_id = params.fetch("path_id")

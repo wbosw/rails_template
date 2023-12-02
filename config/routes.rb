@@ -39,12 +39,7 @@ Rails.application.routes.draw do
   # CREATE
   post("/insert_day", { :controller => "days", :action => "create" })
           
-  # READ
-  get("/days", { :controller => "days", :action => "index" })
-  
-  get("/days/:path_id", { :controller => "days", :action => "show" })
-  
-  # UPDATE
+    # UPDATE
   
   post("/modify_day/:path_id", { :controller => "days", :action => "update" })
   
