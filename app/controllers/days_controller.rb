@@ -23,11 +23,12 @@ class DaysController < ApplicationController
     the_day.date = params.fetch("query_date")
     the_day.name = params.fetch("query_name")
     the_day.lodging = params.fetch("query_lodging")
-    the_day.events_count = params.fetch("query_events_count")
+    
+    @the_trip = params.fetch("query_trip_id")
 
     if the_day.valid?
       the_day.save
-      redirect_to("/days", { :notice => "Day created successfully." })
+      redirect_to("/trips/:path_id/days", { :notice => "Day created successfully." })
     else
       redirect_to("/days", { :alert => the_day.errors.full_messages.to_sentence })
     end

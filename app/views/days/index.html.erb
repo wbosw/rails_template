@@ -1,13 +1,13 @@
 <div>
   <div>
     <h1>
-      List of all days
+      List of days for trip to <%=@the_trip.city%>
     </h1>
   </div>
 </div>
 
 <hr>
-
+ <% if @the_trip.user_id == current_user.id %>
 <div>
   <div>
     <h2>
@@ -20,7 +20,7 @@
           Trip
         </label>
 
-        <input type="text" id="trip_id_box" name="query_trip_id">
+        <input type="text" id="trip_id_box" name="query_trip_id" value="<%=@the_trip.id%>"> 
       </div>
 
       <div>
@@ -36,7 +36,7 @@
           Name
         </label>
 
-        <input type="text" id="name_box" name="query_name">
+        <input type="text" id="name_box" name="query_name" placeholder = "Ex. Day 2">
       </div>
 
       <div>
@@ -47,14 +47,6 @@
         <input type="text" id="lodging_box" name="query_lodging">
       </div>
 
-      <div>
-        <label for="events_count_box">
-          Events count
-        </label>
-
-        <input type="text" id="events_count_box" name="query_events_count">
-      </div>
-
       <button>
         Create day
       </button>
@@ -63,6 +55,8 @@
 </div>
 
 <hr>
+<%end%>
+<% if @list_of_days != nil%>
 <div>
   <div>
     <table border="1">
@@ -144,7 +138,9 @@
       </tr>
       <% end %>
     </table>
+
   </div>
 </div>
 
 <hr>
+    <%end%>

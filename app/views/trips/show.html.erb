@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      Trip #<%= @the_trip.id %> details
+      <%= @the_trip.city %> trip details
     </h1>
 
     <div>
@@ -26,7 +26,7 @@
         User
       </dt>
       <dd>
-        <%= @the_trip.user_id %>
+        <%= @the_trip.user.email %>
       </dd>
 
       <dt>
@@ -51,7 +51,7 @@
       </dd>
 
       <dt>
-        Days count
+        Days count <a href="/trips/<%=params.fetch("path_id")%>/days">View Days</a>
       </dt>
       <dd>
         <%= @the_trip.days_count %>

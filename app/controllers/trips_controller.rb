@@ -17,6 +17,20 @@ class TripsController < ApplicationController
     render({ :template => "trips/show" })
   end
 
+  def indexdays
+    the_trip_id = params.fetch("path_id")
+
+    matching_trips = Trip.where({ :id => the_trip_id })
+
+    @the_trip = matching_trips.at(0)
+
+    matching_days = Day.all.where({ :trip_id => @the_trip.id })
+
+    @list_of_days = matching_days.order({ :created_at => :desc })
+
+    render({ :template => "days/index" })
+  end
+
   def create
     the_trip = Trip.new
     the_trip.city = params.fetch("query_city")

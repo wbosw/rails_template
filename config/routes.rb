@@ -8,16 +8,21 @@ Rails.application.routes.draw do
   # READ
   get("/my_trips", { :controller => "mytrips", :action => "index" })
   
-  get("/my_trips/:path_id", { :controller => "mytrips", :action => "show" })
 
-  # CREATE
-  post("/insert_trip", { :controller => "trips", :action => "create" })
+
        
   # Routes for the general public Trip resource:
   # READ
   get("/trips", { :controller => "trips", :action => "index" })
   
+  # CREATE
+  post("/insert_trip", { :controller => "trips", :action => "create" })
+
+  # READ
+
   get("/trips/:path_id", { :controller => "trips", :action => "show" })
+
+  get("/trips/:path_id/days", { :controller => "trips", :action => "indexdays" })
   
   # UPDATE
   
@@ -25,6 +30,26 @@ Rails.application.routes.draw do
   
   # DELETE
   get("/delete_trip/:path_id", { :controller => "trips", :action => "destroy" })
+
+
+    #------------------------------
+
+  # Routes for the Day resource:
+
+  # CREATE
+  post("/insert_day", { :controller => "days", :action => "create" })
+          
+  # READ
+  get("/days", { :controller => "days", :action => "index" })
+  
+  get("/days/:path_id", { :controller => "days", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_day/:path_id", { :controller => "days", :action => "update" })
+  
+  # DELETE
+  get("/delete_day/:path_id", { :controller => "days", :action => "destroy" })
 
   # Routes for the Rating resource:
 
@@ -62,24 +87,6 @@ Rails.application.routes.draw do
   # DELETE
   get("/delete_event/:path_id", { :controller => "events", :action => "destroy" })
 
-  #------------------------------
-
-  # Routes for the Day resource:
-
-  # CREATE
-  post("/insert_day", { :controller => "days", :action => "create" })
-          
-  # READ
-  get("/days", { :controller => "days", :action => "index" })
-  
-  get("/days/:path_id", { :controller => "days", :action => "show" })
-  
-  # UPDATE
-  
-  post("/modify_day/:path_id", { :controller => "days", :action => "update" })
-  
-  # DELETE
-  get("/delete_day/:path_id", { :controller => "days", :action => "destroy" })
 
   #------------------------------
 
