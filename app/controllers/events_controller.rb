@@ -19,6 +19,7 @@ class EventsController < ApplicationController
 
   def create
     the_event = Event.new
+    the_event.name = params.fetch("query_name")
     the_event.day_id = params.fetch("query_day_id")
     the_event.notes = params.fetch("query_notes")
     the_event.trip_id = params.fetch("query_trip_id")

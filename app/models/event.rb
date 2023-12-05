@@ -3,6 +3,7 @@
 # Table name: events
 #
 #  id         :integer          not null, primary key
+#  name       :string
 #  notes      :string
 #  time       :datetime
 #  created_at :datetime         not null

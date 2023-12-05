@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   get("/trips/:path_id/days", { :controller => "trips", :action => "indexdays" })
   
+  get("/trips/:path_id/days/:day_id", { :controller => "days", :action => "show" })
+
   # UPDATE
   
   post("/modify_trip/:path_id", { :controller => "trips", :action => "update" })

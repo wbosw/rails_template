@@ -1,15 +1,10 @@
 <div>
   <div>
     <h1>
-      Day #<%= @the_day.id %> details
+      <%= @the_day.name %> for <%= @the_day.trip.city %> details
     </h1>
 
     <div>
-      <div>
-        <a href="/days">
-          Go back
-        </a>
-      </div>
 
       <div>
         <a href="/delete_day/<%= @the_day.id %>">
@@ -73,7 +68,6 @@
 
 <hr>
 
-
 <div>
   <div>
     <h2>
@@ -128,4 +122,152 @@
   </div>
 </div>
 
+<hr>
+
+<div>
+  <div>
+    <h1>
+      List of all <%= @the_day.name %> events
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new event
+    </h2>
+
+    <form action="/insert_event" method="post">
+      <div>
+
+        <input type="hidden" id="day_id_box" name="query_day_id" value= "<%=@the_day.id%>">
+      </div>
+      <div>
+        <label for="name_box">
+          Name
+        </label>
+
+        <input type="text" id="name_box" name="query_name">
+      </div>
+
+      <div>
+        <label for="notes_box">
+          Notes
+        </label>
+
+        <input type="text" id="notes_box" name="query_notes">
+      </div>
+
+      <div>
+        <input type="hidden" id="trip_id_box" name="query_trip_id" value="<%= @the_day.trip_id %>" >
+      </div>
+
+      <div>
+        <label for="time_box">
+          Time
+        </label>
+
+        <input type="datetime-local" id="time_box" name="query_time">
+      </div>
+
+      <button>
+        Create event
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+
+<% if @list_of_events != nil %>
+
+  <div>
+    <div>
+      <table border="1">
+        <tr>
+          <th>
+            ID
+          </th>
+
+          <th>
+            Day
+          </th>
+
+<th>
+            Name
+          </th>
+
+          <th>
+            Notes
+          </th>
+
+          <th>
+            Trip
+          </th>
+
+          <th>
+            Time
+          </th>
+
+          <th>
+            Created at
+          </th>
+
+          <th>
+            Updated at
+          </th>
+
+          <th>
+          </th>
+        </tr>
+
+        <% @list_of_events.each do |an_event| %>
+          <tr>
+            <td>
+              <%= an_event.id %>
+            </td>
+
+            <td>
+              <%= an_event.day_id %>
+            </td>
+
+ <td>
+              <%= an_event.name %>
+            </td>
+
+            <td>
+              <%= an_event.notes %>
+            </td>
+
+            <td>
+              <%= an_event.trip_id %>
+            </td>
+
+            <td>
+              <%= an_event.time %>
+            </td>
+
+            <td>
+              <%= time_ago_in_words(an_event.created_at) %> ago
+            </td>
+            <td>
+              <%= time_ago_in_words(an_event.updated_at) %> ago
+            </td>
+
+            <td>
+              <a href="/events/<%= an_event.id %>">
+                Show details
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+<% else %>
+  No Events currently posted
+<% end %>
 <hr>

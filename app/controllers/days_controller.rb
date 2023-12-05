@@ -8,11 +8,15 @@ class DaysController < ApplicationController
   # end
 
   def show
-    the_id = params.fetch("path_id")
+    the_id = params.fetch("day_id")
 
     matching_days = Day.where({ :id => the_id })
 
     @the_day = matching_days.at(0)
+
+    matching_events = Event.all
+
+    @list_of_events = matching_events.where({ :day_id => @the_day.id })
 
     render({ :template => "days/show" })
   end

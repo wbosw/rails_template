@@ -7,140 +7,140 @@
 </div>
 
 <hr>
- <% if @the_trip.user_id == current_user.id %>
-<div>
+<% if @the_trip.user_id == current_user.id %>
   <div>
-    <h2>
-      Add a new day
-    </h2>
+    <div>
+      <h2>
+        Add a new day
+      </h2>
 
-    <form action="/insert_day" method="post">
-      <div>
-        <label for="trip_id_box">
-          Trip
-        </label>
+      <form action="/insert_day" method="post">
+        <div>
+          <label for="trip_id_box">
+            Trip
+          </label>
 
-        <input type="text" id="trip_id_box" name="query_trip_id" value="<%=@the_trip.id%>"> 
-      </div>
+          <input type="text" id="trip_id_box" name="query_trip_id" value="<%=@the_trip.id%>">
+        </div>
 
-      <div>
-        <label for="date_box">
-          Date
-        </label>
+        <div>
+          <label for="date_box">
+            Date
+          </label>
 
-        <input type="date" id="date_box" name="query_date">
-      </div>
+          <input type="date" id="date_box" name="query_date">
+        </div>
 
-      <div>
-        <label for="name_box">
-          Name
-        </label>
+        <div>
+          <label for="name_box">
+            Name
+          </label>
 
-        <input type="text" id="name_box" name="query_name" placeholder = "Ex. Day 2">
-      </div>
+          <input type="text" id="name_box" name="query_name" placeholder = "Ex. Day 2">
+        </div>
 
-      <div>
-        <label for="lodging_box">
-          Lodging
-        </label>
+        <div>
+          <label for="lodging_box">
+            Lodging
+          </label>
 
-        <input type="text" id="lodging_box" name="query_lodging">
-      </div>
+          <input type="text" id="lodging_box" name="query_lodging">
+        </div>
 
-      <button>
-        Create day
-      </button>
-    </form>
+        <button>
+          Create day
+        </button>
+      </form>
+    </div>
   </div>
-</div>
 
-<hr>
+  <hr>
 <%end%>
 <% if @list_of_days != nil%>
-<div>
   <div>
-    <table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
+    <div>
+      <table border="1">
+        <tr>
+          <th>
+            ID
+          </th>
 
-        <th>
-          Trip
-        </th>
+          <th>
+            Trip
+          </th>
 
-        <th>
-          Date
-        </th>
+          <th>
+            Date
+          </th>
 
-        <th>
-          Name
-        </th>
+          <th>
+            Name
+          </th>
 
-        <th>
-          Lodging
-        </th>
+          <th>
+            Lodging
+          </th>
 
-        <th>
-          Events count
-        </th>
+          <th>
+            Events count
+          </th>
 
-        <th>
-          Created at
-        </th>
+          <th>
+            Created at
+          </th>
 
-        <th>
-          Updated at
-        </th>
+          <th>
+            Updated at
+          </th>
 
-        <th>
-        </th>
-      </tr>
+          <th>
+          </th>
+        </tr>
 
-      <% @list_of_days.each do |a_day| %>
-      <tr>
-        <td>
-          <%= a_day.id %>
-        </td>
+        <% @list_of_days.each do |a_day| %>
+          <tr>
+            <td>
+              <%= a_day.id %>
+            </td>
 
-        <td>
-          <%= a_day.trip_id %>
-        </td>
+            <td>
+              <%= a_day.trip_id %>
+            </td>
 
-        <td>
-          <%= a_day.date %>
-        </td>
+            <td>
+              <%= a_day.date %>
+            </td>
 
-        <td>
-          <%= a_day.name %>
-        </td>
+            <td>
+              <%= a_day.name %>
+            </td>
 
-        <td>
-          <%= a_day.lodging %>
-        </td>
+            <td>
+              <%= a_day.lodging %>
+            </td>
 
-        <td>
-          <%= a_day.events_count %>
-        </td>
+            <td>
+              <%= a_day.events_count %>
+            </td>
 
-        <td>
-          <%= time_ago_in_words(a_day.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_day.updated_at) %> ago
-        </td>
+            <td>
+              <%= time_ago_in_words(a_day.created_at) %> ago
+            </td>
+            <td>
+              <%= time_ago_in_words(a_day.updated_at) %> ago
+            </td>
 
-        <td>
-          <a href="/days/<%= a_day.id %>"> <!--should put in /trips/:path_id/days-->
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
+            <td>
+              <a href="/trips/<%= @the_trip.id %>/days/<%= a_day.id %>"> <!--should put in /trips/:path_id/days-->
+                Show details
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </table>
 
+    </div>
   </div>
-</div>
 
-<hr>
-    <%end%>
+  <hr>
+<%end%>
