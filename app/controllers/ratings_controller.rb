@@ -45,17 +45,16 @@ class RatingsController < ApplicationController
         redirect_to("/ratings", { :alert => the_rating.errors.full_messages.to_sentence })
       end
     else
-      the_rating = Rating.where({ :user_id => current_user.id }).first
-        
-      the_rating.user_id = current_user.id
-      the_rating.value = params.fetch("query_value")
-      the_rating.trip_id = params.fetch("query_trip_id")
+              
+      user_rating.user_id = current_user.id
+      user_rating.value = params.fetch("query_value")
+      user_rating.trip_id = params.fetch("query_trip_id")
   
-      if the_rating.valid?
-        the_rating.save
-        redirect_to("/ratings/#{the_rating.id}", { :notice => "Rating updated successfully." })
+      if user_rating.valid?
+        user_rating.save
+        redirect_to("/trips/#{user_rating.trip_id}", { :notice => "Rating updated successfully." })
       else
-        redirect_to("/ratings/#{the_rating.id}", { :alert => the_rating.errors.full_messages.to_sentence })
+        redirect_to("/ratings/#{user_rating.trip_id}", { :alert => user_rating.errors.full_messages.to_sentence })
       end
 
     end
