@@ -5,14 +5,16 @@
     </h1>
 
     <div>
+      <% if current_user == nil %>
 
-      <div>
-        <a href="/delete_day/<%= @the_day.id %>">
-          Delete day
-        </a>
+      <% elsif @the_trip.user_id == current_user.id %>
+        <div>
+          <a href="/delete_day/<%= @the_day.id %>">
+            Delete day
+          </a>
+        </div>
       </div>
-    </div>
-
+    <% end %>
     <dl>
       <dt>
         Trip
@@ -67,63 +69,65 @@
 </div>
 
 <hr>
+<% if current_user == nil %>
 
-<div>
+<% elsif @the_trip.user_id == current_user.id %>
   <div>
-    <h2>
-      Edit day
-    </h2>
+    <div>
+      <h2>
+        Edit day
+      </h2>
 
-    <form action="/modify_day/<%= @the_day.id %>"  method="post" >
-      <div>
-        <label for="trip_id_box">
-          Trip
-        </label>
+      <form action="/modify_day/<%= @the_day.id %>"  method="post" >
+        <div>
+          <label for="trip_id_box">
+            Trip
+          </label>
 
-        <input type="text" id="trip_id_box" name="query_trip_id" value="<%= @the_day.trip_id %>">
-      </div>
+          <input type="text" id="trip_id_box" name="query_trip_id" value="<%= @the_day.trip_id %>">
+        </div>
 
-      <div>
-        <label for="date_box">
-          Date
-        </label>
+        <div>
+          <label for="date_box">
+            Date
+          </label>
 
-        <input type="date" id="date_box" name="query_date" value="<%= @the_day.date %>">
-      </div>
+          <input type="date" id="date_box" name="query_date" value="<%= @the_day.date %>">
+        </div>
 
-      <div>
-        <label for="name_box">
-          Name
-        </label>
+        <div>
+          <label for="name_box">
+            Name
+          </label>
 
-        <input type="text" id="name_box" name="query_name" value="<%= @the_day.name %>">
-      </div>
+          <input type="text" id="name_box" name="query_name" value="<%= @the_day.name %>">
+        </div>
 
-      <div>
-        <label for="lodging_box">
-          Lodging
-        </label>
+        <div>
+          <label for="lodging_box">
+            Lodging
+          </label>
 
-        <input type="text" id="lodging_box" name="query_lodging" value="<%= @the_day.lodging %>">
-      </div>
+          <input type="text" id="lodging_box" name="query_lodging" value="<%= @the_day.lodging %>">
+        </div>
 
-      <div>
-        <label for="events_count_box">
-          Events count
-        </label>
+        <div>
+          <label for="events_count_box">
+            Events count
+          </label>
 
-        <input type="text" id="events_count_box" name="query_events_count" value="<%= @the_day.events_count %>">
-      </div>
+          <input type="text" id="events_count_box" name="query_events_count" value="<%= @the_day.events_count %>">
+        </div>
 
-      <button>
-        Update day
-      </button>
-    </form>
+        <button>
+          Update day
+        </button>
+      </form>
+    </div>
   </div>
-</div>
 
-<hr>
-
+  <hr>
+<% end %>
 <div>
   <div>
     <h1>
@@ -132,56 +136,57 @@
   </div>
 </div>
 
-<hr>
+<% if current_user == nil %>
 
-<div>
+<% elsif @the_trip.user_id == current_user.id %>
   <div>
-    <h2>
-      Add a new event
-    </h2>
+    <div>
+      <h2>
+        Add a new event
+      </h2>
 
-    <form action="/insert_event" method="post">
-      <div>
+      <form action="/insert_event" method="post">
+        <div>
 
-        <input type="hidden" id="day_id_box" name="query_day_id" value= "<%=@the_day.id%>">
-      </div>
-      <div>
-        <label for="name_box">
-          Name
-        </label>
+          <input type="hidden" id="day_id_box" name="query_day_id" value= "<%=@the_day.id%>">
+        </div>
+        <div>
+          <label for="name_box">
+            Name
+          </label>
 
-        <input type="text" id="name_box" name="query_name">
-      </div>
+          <input type="text" id="name_box" name="query_name">
+        </div>
 
-      <div>
-        <label for="notes_box">
-          Notes
-        </label>
+        <div>
+          <label for="notes_box">
+            Notes
+          </label>
 
-        <input type="text" id="notes_box" name="query_notes">
-      </div>
+          <input type="text" id="notes_box" name="query_notes">
+        </div>
 
-      <div>
-        <input type="hidden" id="trip_id_box" name="query_trip_id" value="<%= @the_day.trip_id %>" >
-      </div>
+        <div>
+          <input type="hidden" id="trip_id_box" name="query_trip_id" value="<%= @the_day.trip_id %>" >
+        </div>
 
-      <div>
-        <label for="time_box">
-          Time
-        </label>
+        <div>
+          <label for="time_box">
+            Time
+          </label>
 
-        <input type="datetime-local" id="time_box" name="query_time">
-      </div>
+          <input type="datetime-local" id="time_box" name="query_time">
+        </div>
 
-      <button>
-        Create event
-      </button>
-    </form>
+        <button>
+          Create event
+        </button>
+      </form>
+    </div>
   </div>
-</div>
 
-<hr>
-
+  <hr>
+<% end %>
 <% if @list_of_events != nil %>
 
   <div>
@@ -196,7 +201,7 @@
             Day
           </th>
 
-<th>
+          <th>
             Name
           </th>
 
@@ -234,7 +239,7 @@
               <%= an_event.day_id %>
             </td>
 
- <td>
+            <td>
               <%= an_event.name %>
             </td>
 

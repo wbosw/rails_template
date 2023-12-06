@@ -5,7 +5,9 @@
     </h1>
 
     <div>
-      <% if @the_trip.user_id == current_user.id %>
+      <% if current_user == nil %>
+
+      <% elsif @the_trip.user_id == current_user.id %>
         <div>
           <a href="/delete_trip/<%= @the_trip.id %>">
             Delete trip
@@ -16,159 +18,148 @@
 
     <dl>
       <dt>
-        City
+        Destination city:
       </dt>
       <dd>
         <%= @the_trip.city %>
       </dd>
 
       <dt>
-        User
+        Created by:
       </dt>
       <dd>
         <%= @the_trip.user.email %>
       </dd>
 
       <dt>
-        Public rating
+        Public rating:
       </dt>
       <dd>
-        <%= @the_trip.public_rating %>
+        <%= @the_trip.public_rating %> / 5
       </dd>
-
       <dt>
-        Private
+        Number of ratings:
       </dt>
       <dd>
-        <%= @the_trip.private %>
+        <%= @the_trip.ratings_count %>
       </dd>
-
       <dt>
-        User rating
+        My rating:
       </dt>
       <dd>
         <%= @the_trip.user_rating %>
       </dd>
 
       <dt>
-        Days count <a href="/trips/<%=params.fetch("path_id")%>/days">View Days</a>
+        Days count: <a href="/trips/<%=params.fetch("path_id")%>/days">View Days</a>
       </dt>
       <dd>
         <%= @the_trip.days_count %>
       </dd>
 
       <dt>
-        Events count
+        Number of events:
       </dt>
       <dd>
         <%= @the_trip.events_count %>
       </dd>
 
       <dt>
-        Ratings count
-      </dt>
-      <dd>
-        <%= @the_trip.ratings_count %>
-      </dd>
-
-      <dt>
-        Created at
+        Created:
       </dt>
       <dd>
         <%= time_ago_in_words(@the_trip.created_at) %> ago
       </dd>
+      <% if time_ago_in_words(@the_trip.updated_at) == time_ago_in_words(@the_trip.created_at) %>
 
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_trip.updated_at) %> ago
-      </dd>
+      <% else %>
+        <dt>
+          Updated:
+        </dt>
+        <dd>
+          <%= time_ago_in_words(@the_trip.updated_at) %> ago
+        </dd>
+      <% end %>
     </dl>
   </div>
 </div>
 
 <hr>
+<% if current_user == nil %>
 
-<% if @the_trip.user_id == current_user.id %>
+<% elsif @the_trip.user_id == current_user.id %>
 
-<div>
   <div>
-    <h2>
-      Edit trip
-    </h2>
+    <div>
+      <h2>
+        Edit trip
+      </h2>
 
-    <form action="/modify_trip/<%= @the_trip.id %>"  method="post" >
-      <div>
-        <label for="city_box">
-          City
-        </label>
+      <form action="/modify_trip/<%= @the_trip.id %>"  method="post" >
+        <div>
+          <label for="city_box">
+            City:
+          </label>
 
-        <input type="text" id="city_box" name="query_city" value="<%= @the_trip.city %>">
-      </div>
+          <input type="text" id="city_box" name="query_city" value="<%= @the_trip.city %>">
+        </div>
 
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
+        <div>
 
-        <input type="text" id="user_id_box" name="query_user_id" value="<%= @the_trip.user_id %>">
-      </div>
+          <input type="hidden" id="user_id_box" name="query_user_id" value="<%= @the_trip.user_id %>">
+        </div>
 
-      <div>
-        <label for="public_rating_box">
-          Public rating
-        </label>
+        <div>
 
-        <input type="text" id="public_rating_box" name="query_public_rating" value="<%= @the_trip.public_rating %>">
-      </div>
+          <input type="hidden" id="public_rating_box" name="query_public_rating" value="<%= @the_trip.public_rating %>">
+        </div>
 
-      <div>
-        <input type="checkbox" id="private_box" name="query_private" value="1" <%= "checked" if @the_trip.private %>>
+        <div>
+          <input type="checkbox" id="private_box" name="query_private" value="1" <%= "checked" if @the_trip.private %>>
 
-        <label for="private_box">
-          Private
-        </label>
-      </div>
+          <label for="private_box">
+            Private
+          </label>
+        </div>
 
-      <div>
-        <label for="user_rating_box">
-          User rating
-        </label>
+        <div>
+          <label for="user_rating_box">
+            My rating:
+          </label>
 
-        <input type="text" id="user_rating_box" name="query_user_rating" value="<%= @the_trip.user_rating %>">
-      </div>
+          <select name="query_user_rating" id="user_rating_box" value="5">
+            <option value="">Select</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+          </select>
 
-      <div>
-        <label for="days_count_box">
-          Days count
-        </label>
+          <!-- <input type="text" id="user_rating_box" name="query_user_rating" value="<%#= @the_trip.user_rating %>">-->
+        </div>
 
-        <input type="text" id="days_count_box" name="query_days_count" value="<%= @the_trip.days_count %>">
-      </div>
+        <div>
 
-      <div>
-        <label for="events_count_box">
-          Events count
-        </label>
+          <input type="hidden" id="days_count_box" name="query_days_count" value="<%= @the_trip.days_count %>">
+        </div>
 
-        <input type="text" id="events_count_box" name="query_events_count" value="<%= @the_trip.events_count %>">
-      </div>
+        <div>
 
-      <div>
-        <label for="ratings_count_box">
-          Ratings count
-        </label>
+          <input type="hidden" id="events_count_box" name="query_events_count" value="<%= @the_trip.events_count %>">
+        </div>
 
-        <input type="text" id="ratings_count_box" name="query_ratings_count" value="<%= @the_trip.ratings_count %>">
-      </div>
+        <div>
 
-      <button>
-        Update trip
-      </button>
-    </form>
+          <input type="hidden" id="ratings_count_box" name="query_ratings_count" value="<%= @the_trip.ratings_count %>">
+        </div>
+
+        <button>
+          Update trip
+        </button>
+      </form>
+    </div>
   </div>
-</div>
 
 <%end%>
 <hr>

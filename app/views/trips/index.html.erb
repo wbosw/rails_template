@@ -22,64 +22,19 @@
             City
           </label>
 
-          <input type="text" id="city_box" name="query_city">
+          <input type="text" id="city_box" name="query_city" placeholder="Where to? Ex. 'Madrid'">
         </div>
 
         <div>
-          <label for="user_id_box">
-            User
-          </label>
 
-          <input type="text" id="user_id_box" name="query_user_id" value="<%= current_user.id %>">
+          <input type="hidden" id="user_id_box" name="query_user_id" value="<%= current_user.id %>">
 
 
-      </div>
-
-      <!-- <div>
-        <label for="public_rating_box">
-          Public rating
-        </label>
-
-        <input type="text" id="public_rating_box" name="query_public_rating">
-      </div>-->
-
-      <div>
+    
         <input type="checkbox" id="private_box" name="query_private" value="1">
 
-        <label for="private_box">Private</label>
+        <label for="private_box">Private (Only you will be able to view "Private" Trips)</label>
       </div>
-
-      <!--<div>
-        <label for="user_rating_box">
-          User rating
-        </label>
-
-        <input type="text" id="user_rating_box" name="query_user_rating">
-      </div>-->
-
-      <!--<div>
-        <label for="days_count_box">
-          Days count
-        </label>
-
-        <input type="text" id="days_count_box" name="query_days_count">
-      </div>
-
-      <div>
-        <label for="events_count_box">
-          Events count
-        </label>
-
-        <input type="text" id="events_count_box" name="query_events_count">
-      </div>
-
-      <div>
-        <label for="ratings_count_box">
-          Ratings count
-        </label>
-
-        <input type="text" id="ratings_count_box" name="query_ratings_count">
-      </div>-->
 
       <button>
         Create trip
