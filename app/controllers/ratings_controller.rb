@@ -19,7 +19,7 @@ class RatingsController < ApplicationController
 
   def create
     the_rating = Rating.new
-    the_rating.user_id = params.fetch("query_user_id")
+    the_rating.user_id = current_user.id
     the_rating.value = params.fetch("query_value")
     the_rating.trip_id = params.fetch("query_trip_id")
 
@@ -28,6 +28,36 @@ class RatingsController < ApplicationController
       redirect_to("/trips/#{the_rating.trip_id}", { :notice => "Rating created successfully." })
     else
       redirect_to("/ratings", { :alert => the_rating.errors.full_messages.to_sentence })
+    end
+  end
+
+  def create2
+    user_rating = Rating.where({ :user_id => current_user.id }).where({ :trip_id => params.fetch("query_trip_id")}).first
+    if user_rating == nil
+      the_rating = Rating.new
+      the_rating.user_id = current_user.id
+      the_rating.value = params.fetch("query_value")
+      the_rating.trip_id = params.fetch("query_trip_id")
+      if the_rating.valid?
+        the_rating.save
+        redirect_to("/trips/#{the_rating.trip_id}", { :notice => "Rating created successfully." })
+      else
+        redirect_to("/ratings", { :alert => the_rating.errors.full_messages.to_sentence })
+      end
+    else
+      the_rating = Rating.where({ :user_id => current_user.id }).first
+        
+      the_rating.user_id = current_user.id
+      the_rating.value = params.fetch("query_value")
+      the_rating.trip_id = params.fetch("query_trip_id")
+  
+      if the_rating.valid?
+        the_rating.save
+        redirect_to("/ratings/#{the_rating.id}", { :notice => "Rating updated successfully." })
+      else
+        redirect_to("/ratings/#{the_rating.id}", { :alert => the_rating.errors.full_messages.to_sentence })
+      end
+
     end
   end
 
@@ -41,7 +71,7 @@ class RatingsController < ApplicationController
 
     if the_rating.valid?
       the_rating.save
-      redirect_to("/ratings/#{the_rating.id}", { :notice => "Rating updated successfully."} )
+      redirect_to("/ratings/#{the_rating.id}", { :notice => "Rating updated successfully." })
     else
       redirect_to("/ratings/#{the_rating.id}", { :alert => the_rating.errors.full_messages.to_sentence })
     end
@@ -53,6 +83,6 @@ class RatingsController < ApplicationController
 
     the_rating.destroy
 
-    redirect_to("/ratings", { :notice => "Rating deleted successfully."} )
+    redirect_to("/ratings", { :notice => "Rating deleted successfully." })
   end
 end

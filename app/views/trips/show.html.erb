@@ -89,8 +89,10 @@
 <h3>Rate This Trip</h3>
 </div>
 <div>
-<form action="/insert_rating" method="post">
-
+<form action="/insert_rating2" method="post">
+<div>
+<input type="hidden" name="query_trip_id" value="<%= @the_trip.id %>">
+</div>
 <div>
 <label for="user_rating_box">
             My rating:
@@ -254,14 +256,7 @@
     <div>
       <table border="1">
         <tr>
-          <th>
-            ID
-          </th>
-
-          <th>
-            Trip
-          </th>
-
+         
           <th>
             Date
           </th>
@@ -275,15 +270,7 @@
           </th>
 
           <th>
-            Events count
-          </th>
-
-          <th>
-            Created at
-          </th>
-
-          <th>
-            Updated at
+            Number of Events
           </th>
 
           <th>
@@ -292,14 +279,7 @@
 
         <% @list_of_days.each do |a_day| %>
           <tr>
-            <td>
-              <%= a_day.id %>
-            </td>
-
-            <td>
-              <%= a_day.trip_id %>
-            </td>
-
+           
             <td>
               <%= a_day.date %>
             </td>
@@ -314,13 +294,6 @@
 
             <td>
               <%= a_day.events_count %>
-            </td>
-
-            <td>
-              <%= time_ago_in_words(a_day.created_at) %> ago
-            </td>
-            <td>
-              <%= time_ago_in_words(a_day.updated_at) %> ago
             </td>
 
             <td>
