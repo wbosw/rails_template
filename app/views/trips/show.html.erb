@@ -84,6 +84,33 @@
   </div>
 </div>
 
+<% if current_user != nil %>
+<div>
+<h3>Rate This Trip</h3>
+</div>
+<div>
+<form action="/insert_rating" method="post">
+
+<div>
+<label for="user_rating_box">
+            My rating:
+          </label>
+
+          <select name="query_value" id="user_rating_box">
+            <option value="">Select</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+          </select>
+          /5
+          </div>
+          <button>Submit Rating</button>
+</form>
+</div>
+<% end %>
+
 <hr>
 <% if current_user == nil %>
 
@@ -127,7 +154,7 @@
             My rating:
           </label>
 
-          <select name="query_user_rating" id="user_rating_box" value="5">
+          <select name="query_user_rating" id="user_rating_box">
             <option value="">Select</option>
             <option value="5">5</option>
             <option value="4">4</option>
@@ -163,3 +190,150 @@
 
 <%end%>
 <hr>
+
+<div>
+  <div>
+    <h1>
+      List of days for trip to <%=@the_trip.city%>
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+ <% if current_user == nil %>
+      
+<% elsif @the_trip.user_id == current_user.id %>
+  <div>
+    <div>
+      <h2>
+        Add a new day
+      </h2>
+
+      <form action="/insert_day" method="post">
+        <div>
+        
+          <input type="hidden" id="trip_id_box" name="query_trip_id" value="<%=@the_trip.id%>">
+        </div>
+
+        <div>
+          <label for="date_box">
+            Date
+          </label>
+
+          <input type="date" id="date_box" name="query_date">
+        </div>
+
+        <div>
+          <label for="name_box">
+            Name
+          </label>
+
+          <input type="text" id="name_box" name="query_name" placeholder = "Ex. Day 2">
+        </div>
+
+        <div>
+          <label for="lodging_box">
+            Lodging
+          </label>
+
+          <input type="text" id="lodging_box" name="query_lodging">
+        </div>
+
+        <button>
+          Create day
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <hr>
+<%end%>
+<% if @list_of_days != nil%>
+  <div>
+    <div>
+      <table border="1">
+        <tr>
+          <th>
+            ID
+          </th>
+
+          <th>
+            Trip
+          </th>
+
+          <th>
+            Date
+          </th>
+
+          <th>
+            Name
+          </th>
+
+          <th>
+            Lodging
+          </th>
+
+          <th>
+            Events count
+          </th>
+
+          <th>
+            Created at
+          </th>
+
+          <th>
+            Updated at
+          </th>
+
+          <th>
+          </th>
+        </tr>
+
+        <% @list_of_days.each do |a_day| %>
+          <tr>
+            <td>
+              <%= a_day.id %>
+            </td>
+
+            <td>
+              <%= a_day.trip_id %>
+            </td>
+
+            <td>
+              <%= a_day.date %>
+            </td>
+
+            <td>
+              <%= a_day.name %>
+            </td>
+
+            <td>
+              <%= a_day.lodging %>
+            </td>
+
+            <td>
+              <%= a_day.events_count %>
+            </td>
+
+            <td>
+              <%= time_ago_in_words(a_day.created_at) %> ago
+            </td>
+            <td>
+              <%= time_ago_in_words(a_day.updated_at) %> ago
+            </td>
+
+            <td>
+              <a href="/trips/<%= @the_trip.id %>/days/<%= a_day.id %>"> <!--should put in /trips/:path_id/days-->
+                Show details
+              </a>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+
+    </div>
+  </div>
+
+  <hr>
+<%end%>

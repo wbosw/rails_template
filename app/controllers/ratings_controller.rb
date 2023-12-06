@@ -25,7 +25,7 @@ class RatingsController < ApplicationController
 
     if the_rating.valid?
       the_rating.save
-      redirect_to("/ratings", { :notice => "Rating created successfully." })
+      redirect_to("/trips/#{the_rating.trip_id}", { :notice => "Rating created successfully." })
     else
       redirect_to("/ratings", { :alert => the_rating.errors.full_messages.to_sentence })
     end

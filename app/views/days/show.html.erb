@@ -1,13 +1,13 @@
 <div>
   <div>
     <h1>
-      <%= @the_day.name %> for <%= @the_day.trip.city %> details
+      <%= @the_day.name %> for <%= @the_day.trip.city %> trip details
     </h1>
 
     <div>
       <% if current_user == nil %>
 
-      <% elsif @the_trip.user_id == current_user.id %>
+      <% elsif @the_day.trip.user_id == current_user.id %>
         <div>
           <a href="/delete_day/<%= @the_day.id %>">
             Delete day
@@ -15,41 +15,36 @@
         </div>
       </div>
     <% end %>
-    <dl>
-      <dt>
-        Trip
-      </dt>
-      <dd>
-        <%= @the_day.trip_id %>
-      </dd>
+    <hr>
 
       <dt>
-        Date
+        Date:
       </dt>
       <dd>
         <%= @the_day.date %>
       </dd>
 
       <dt>
-        Name
+        Day Name:
       </dt>
       <dd>
         <%= @the_day.name %>
       </dd>
 
       <dt>
-        Lodging
+        Lodging:
       </dt>
       <dd>
         <%= @the_day.lodging %>
       </dd>
 
       <dt>
-        Events count
+        Number of Events: 
       </dt>
       <dd>
         <%= @the_day.events_count %>
       </dd>
+
 
       <dt>
         Created at
@@ -57,6 +52,8 @@
       <dd>
         <%= time_ago_in_words(@the_day.created_at) %> ago
       </dd>
+<% if time_ago_in_words(@the_day.updated_at) == time_ago_in_words(@the_day.created_at) %>
+<% else %>
 
       <dt>
         Updated at
@@ -67,11 +64,11 @@
     </dl>
   </div>
 </div>
-
+<% end %>
 <hr>
 <% if current_user == nil %>
 
-<% elsif @the_trip.user_id == current_user.id %>
+<% elsif @the_day.trip.user_id == current_user.id %>
   <div>
     <div>
       <h2>
@@ -80,11 +77,8 @@
 
       <form action="/modify_day/<%= @the_day.id %>"  method="post" >
         <div>
-          <label for="trip_id_box">
-            Trip
-          </label>
-
-          <input type="text" id="trip_id_box" name="query_trip_id" value="<%= @the_day.trip_id %>">
+         
+          <input type="hidden" id="trip_id_box" name="query_trip_id" value="<%= @the_day.trip_id %>">
         </div>
 
         <div>
@@ -112,11 +106,8 @@
         </div>
 
         <div>
-          <label for="events_count_box">
-            Events count
-          </label>
-
-          <input type="text" id="events_count_box" name="query_events_count" value="<%= @the_day.events_count %>">
+       
+          <input type="hidden" id="events_count_box" name="query_events_count" value="<%= @the_day.events_count %>">
         </div>
 
         <button>
@@ -138,7 +129,7 @@
 
 <% if current_user == nil %>
 
-<% elsif @the_trip.user_id == current_user.id %>
+<% elsif @the_day.trip.user_id == current_user.id %>
   <div>
     <div>
       <h2>

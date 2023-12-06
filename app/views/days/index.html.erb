@@ -19,11 +19,8 @@
 
       <form action="/insert_day" method="post">
         <div>
-          <label for="trip_id_box">
-            Trip
-          </label>
-
-          <input type="text" id="trip_id_box" name="query_trip_id" value="<%=@the_trip.id%>">
+        
+          <input type="hidden" id="trip_id_box" name="query_trip_id" value="<%=@the_trip.id%>">
         </div>
 
         <div>
