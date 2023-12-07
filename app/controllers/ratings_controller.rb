@@ -17,24 +17,24 @@ class RatingsController < ApplicationController
     render({ :template => "ratings/show" })
   end
 
-  def create
-    the_rating = Rating.new
-    the_rating.user_id = current_user.id
-    the_rating.value = params.fetch("query_value")
-    the_rating.trip_id = params.fetch("query_trip_id")
+  # def create
+  #   the_rating = Rating.new
+  #   the_rating.user_id = current_user.id
+  #   the_rating.value = params.fetch("query_value")
+  #   the_rating.trip_id = params.fetch("query_trip_id")
 
-    if the_rating.valid?
-      the_rating.save
-      redirect_to("/trips/#{the_rating.trip_id}", { :notice => "Rating created successfully." })
-    else
-      redirect_to("/ratings", { :alert => the_rating.errors.full_messages.to_sentence })
-    end
-  end
+  #   if the_rating.valid?
+  #     the_rating.save
+  #     redirect_to("/trips/#{the_rating.trip_id}", { :notice => "Rating created successfully." })
+  #   else
+  #     redirect_to("/ratings", { :alert => the_rating.errors.full_messages.to_sentence })
+  #   end
+  # end
 
   def create2
     user_rating = Rating.where({ :user_id => current_user.id }).where({ :trip_id => params.fetch("query_trip_id")}).first
     
-    # associated_trip = Trip.where({:id => params.fetch("query_trip_id")}).first
+    associated_trip = Trip.where({:id => params.fetch("query_trip_id")}).first
 
     if user_rating == nil
       the_rating = Rating.new
@@ -42,11 +42,25 @@ class RatingsController < ApplicationController
       the_rating.value = params.fetch("query_value")
       the_rating.trip_id = params.fetch("query_trip_id")
       
-      # associated_trip.ratings_count = 100
+      trip_id = params.fetch("query_trip_id")
 
+      matching_ratings = Rating.where({ :trip_id => trip_id }).where("value IS NOT NULL")
+  
+      @list_of_ratings = matching_ratings.order({ :created_at => :desc })
+
+      ratings_count = @list_of_ratings.count + 1
+
+      sum_ratings = 0
+      @list_of_ratings.each do |a_rating|
+        
+      sum_ratings = sum_ratings + a_rating.value
+      end
+
+      associated_trip.public_rating = (sum_ratings.to_f + the_rating.value) / ratings_count.to_f
 
       if the_rating.valid?
         the_rating.save
+        associated_trip.save
         # associated_trip.save
         redirect_to("/trips/#{the_rating.trip_id}", { :notice => "Rating created successfully." })
       else
@@ -57,9 +71,27 @@ class RatingsController < ApplicationController
       user_rating.user_id = current_user.id
       user_rating.value = params.fetch("query_value")
       user_rating.trip_id = params.fetch("query_trip_id")
+      
+      trip_id = params.fetch("query_trip_id")
+
+      matching_ratings = Rating.where({ :trip_id => trip_id }).where("value IS NOT NULL")
   
+      @list_of_ratings = matching_ratings.order({ :created_at => :desc })
+
+      ratings_count = @list_of_ratings.count + 1
+
+      sum_ratings = 0
+      @list_of_ratings.each do |a_rating|
+        
+      sum_ratings = sum_ratings + a_rating.value
+      end
+
+      associated_trip.public_rating = (sum_ratings.to_f + user_rating.value) / ratings_count.to_f
+
       if user_rating.valid?
         user_rating.save
+        associated_trip.save
+
         redirect_to("/trips/#{user_rating.trip_id}", { :notice => "Rating updated successfully." })
       else
         redirect_to("/ratings/#{user_rating.trip_id}", { :alert => user_rating.errors.full_messages.to_sentence })

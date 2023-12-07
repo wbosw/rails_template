@@ -59,7 +59,7 @@ class TripsController < ApplicationController
     the_trip.user_id = params.fetch("query_user_id")
     the_trip.public_rating = params.fetch("query_public_rating")
     the_trip.private = params.fetch("query_private", false)
-    the_trip.user_rating = params.fetch("query_user_rating")
+    
     the_trip.days_count = params.fetch("query_days_count")
     the_trip.events_count = params.fetch("query_events_count")
     the_trip.ratings_count = params.fetch("query_ratings_count")

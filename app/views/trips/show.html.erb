@@ -85,32 +85,31 @@
 </div>
 
 <% if current_user != nil %>
-<div>
-<h3>Rate This Trip</h3>
-</div>
-<div>
-<form action="/insert_rating2" method="post">
-<div>
-<input type="hidden" name="query_trip_id" value="<%= @the_trip.id %>">
-</div>
-<div>
-<label for="user_rating_box">
-            My rating:
-          </label>
+  <div>
+    <h3>Rate This Trip</h3>
+  </div>
+  <div>
+    <form action="/insert_rating2" method="post">
+      <div>
+        <input type="hidden" name="query_trip_id" value="<%= @the_trip.id %>">
+      </div>
+      <div>
+        <label for="user_rating_box">
+          My rating:
+        </label>
 
-          <select name="query_value" id="user_rating_box">
-            <option value="">Select</option>
-            <option value=5>5</option>
-            <option value=4>4</option>
-            <option value=3>3</option>
-            <option value=2>2</option>
-            <option value=1>1</option>
-          </select>
-          /5
-          </div>
-          <button>Submit Rating</button>
-</form>
-</div>
+        <select name="query_value" id="user_rating_box">
+          <option value=5>5</option>
+          <option value=4>4</option>
+          <option value=3>3</option>
+          <option value=2>2</option>
+          <option value=1>1</option>
+        </select>
+        /5
+      </div>
+      <button>Submit Rating</button>
+    </form>
+  </div>
 <% end %>
 
 <hr>
@@ -152,23 +151,6 @@
         </div>
 
         <div>
-          <label for="user_rating_box">
-            My rating:
-          </label>
-
-          <select name="query_user_rating" id="user_rating_box">
-            <option value="">Select</option>
-            <option value="5">5</option>
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2">2</option>
-            <option value="1">1</option>
-          </select>
-
-          <!-- <input type="text" id="user_rating_box" name="query_user_rating" value="<%#= @the_trip.user_rating %>">-->
-        </div>
-
-        <div>
 
           <input type="hidden" id="days_count_box" name="query_days_count" value="<%= @the_trip.days_count %>">
         </div>
@@ -203,8 +185,8 @@
 
 <hr>
 
- <% if current_user == nil %>
-      
+<% if current_user == nil %>
+
 <% elsif @the_trip.user_id == current_user.id %>
   <div>
     <div>
@@ -214,7 +196,7 @@
 
       <form action="/insert_day" method="post">
         <div>
-        
+
           <input type="hidden" id="trip_id_box" name="query_trip_id" value="<%=@the_trip.id%>">
         </div>
 
@@ -256,7 +238,7 @@
     <div>
       <table border="1">
         <tr>
-         
+
           <th>
             Date
           </th>
@@ -279,7 +261,7 @@
 
         <% @list_of_days.each do |a_day| %>
           <tr>
-           
+
             <td>
               <%= a_day.date %>
             </td>

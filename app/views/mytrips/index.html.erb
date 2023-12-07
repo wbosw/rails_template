@@ -112,8 +112,8 @@
             <%= a_trip.events_count %>
           </td>
           <td>
-            <%if a_trip.ratings.where({ :trip_id => a_trip.id}).first != nil %>
-              <%= a_trip.ratings.where({ :trip_id => a_trip.id}).where({ :user_id => a_trip. user_id}).first.value %>
+            <%if a_trip.ratings.where({ :trip_id => a_trip.id}).where({ :user_id => a_trip.user_id}).first != nil %>
+              <%= a_trip.ratings.where({ :trip_id => a_trip.id}).where({ :user_id => a_trip.user_id}).first.value %>
             <%end%>
           </td>
 
