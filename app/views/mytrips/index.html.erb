@@ -20,18 +20,19 @@
           City
         </label>
 
-        <input type="text" id="city_box" name="query_city">
+        <input type="text" id="city_box" name="query_city"
+        placeholder="Where to? Ex. 'Madrid'">
       </div>
 
       <div>
-      
+
         <input type="hidden" id="user_id_box" name="query_user_id" value="<%= current_user.id %>">
       </div>
 
       <div>
         <input type="checkbox" id="private_box" name="query_private" value="1">
 
-        <label for="private_box">Private</label>
+        <label for="private_box">Private (Only you will be able to view "Private" Trips)</label>
       </div>
 
       <button>
@@ -46,13 +47,9 @@
   <div>
     <table border="1">
       <tr>
-      
-        <th>
-          City
-        </th>
 
         <th>
-          Public rating
+          City
         </th>
 
         <th>
@@ -60,11 +57,7 @@
         </th>
 
         <th>
-          My rating
-        </th>
-
-        <th>
-          Days count
+          Trip length
         </th>
 
         <th>
@@ -72,11 +65,19 @@
         </th>
 
         <th>
-          Ratings count
+          My rating
         </th>
 
         <th>
-          Created at
+          Public rating
+        </th>
+
+        <th>
+          Number of Ratings
+        </th>
+
+        <th>
+          Created
         </th>
 
         <th>
@@ -89,14 +90,11 @@
 
       <% @list_of_trips.where( :user_id => current_user.id ).each do |a_trip| %>
         <tr>
-          
+
           <td>
             <%= a_trip.city %>
           </td>
 
-          <td>
-            <%= a_trip.public_rating %>
-          </td>
 
           <td>
             <%if a_trip.private %>
@@ -107,17 +105,20 @@
           </td>
 
           <td>
-          <%if a_trip.ratings.where({ :trip_id => a_trip.id}).first != nil %>
-            <%= a_trip.ratings.where({ :trip_id => a_trip.id}).where({ :user_id => a_trip. user_id}).first.value %>
-            <%end%>
-          </td>
-
-          <td>
             <%= a_trip.days_count %>
           </td>
 
           <td>
             <%= a_trip.events_count %>
+          </td>
+          <td>
+            <%if a_trip.ratings.where({ :trip_id => a_trip.id}).first != nil %>
+              <%= a_trip.ratings.where({ :trip_id => a_trip.id}).where({ :user_id => a_trip. user_id}).first.value %>
+            <%end%>
+          </td>
+
+          <td>
+            <%= a_trip.public_rating %>
           </td>
 
           <td>

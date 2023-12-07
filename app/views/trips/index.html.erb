@@ -49,9 +49,6 @@
   <div>
     <table border="1">
       <tr>
-        <th>
-          ID
-        </th>
 
         <th>
           City
@@ -62,11 +59,7 @@
         </th>
 
         <th>
-          Public rating
-        </th>
-
-             <th>
-          Days count
+          Trip length
         </th>
 
         <th>
@@ -74,15 +67,15 @@
         </th>
 
         <th>
-          Ratings count
+          Public rating
         </th>
 
         <th>
-          Created at
+          Number of Ratings
         </th>
 
         <th>
-          Updated at
+          Created
         </th>
 
         <th>
@@ -93,28 +86,25 @@
         <% @list_of_trips.each do |a_trip| %>
           <%if a_trip.private == false %>
             <tr>
-              <td>
-                <%= a_trip.id %>
-              </td>
 
               <td>
                 <%= a_trip.city %>
               </td>
 
               <td>
-                <%= a_trip.user_id %>
+                <%= a_trip.user.email %>
               </td>
 
               <td>
-                <%= a_trip.public_rating %>
-              </td>
-
-                          <td>
-                <%= a_trip.days_count %>
+                <%= a_trip.days_count %> days
               </td>
 
               <td>
                 <%= a_trip.events_count %>
+              </td>
+
+              <td>
+                <%= a_trip.public_rating %>
               </td>
 
               <td>
@@ -123,9 +113,6 @@
 
               <td>
                 <%= time_ago_in_words(a_trip.created_at) %> ago
-              </td>
-              <td>
-                <%= time_ago_in_words(a_trip.updated_at) %> ago
               </td>
 
               <td>
@@ -142,28 +129,25 @@
           <%if a_trip.private == false && a_trip.user_id != current_user.id %>
 
             <tr>
-              <td>
-                <%= a_trip.id %>
-              </td>
 
               <td>
                 <%= a_trip.city %>
               </td>
 
               <td>
-                <%= a_trip.user_id %>
+                <%= a_trip.user.email %>
               </td>
 
               <td>
-                <%= a_trip.public_rating %>
-              </td>
-
-                  <td>
-                <%= a_trip.days_count %>
+                <%= a_trip.days_count %> days
               </td>
 
               <td>
                 <%= a_trip.events_count %>
+              </td>
+
+              <td>
+                <%= a_trip.public_rating %>
               </td>
 
               <td>
@@ -172,9 +156,6 @@
 
               <td>
                 <%= time_ago_in_words(a_trip.created_at) %> ago
-              </td>
-              <td>
-                <%= time_ago_in_words(a_trip.updated_at) %> ago
               </td>
 
               <td>
@@ -186,9 +167,9 @@
           <%else%>
           <%end%>
         <% end %>
-        <%end%>
-      </table>
-    </div>
+      <%end%>
+    </table>
   </div>
+</div>
 
-  <hr>
+<hr>

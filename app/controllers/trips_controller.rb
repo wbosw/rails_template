@@ -39,6 +39,8 @@ class TripsController < ApplicationController
     the_trip.city = params.fetch("query_city")
     the_trip.user_id = params.fetch("query_user_id")
     the_trip.private = params.fetch("query_private", false)
+    the_trip.days_count = 0
+    the_trip.events_count = 0
   
 
     if the_trip.valid?
