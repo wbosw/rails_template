@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_05_225516) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_07_200153) do
   create_table "days", force: :cascade do |t|
     t.integer "trip_id"
     t.date "date"
@@ -42,7 +42,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_05_225516) do
   create_table "trips", force: :cascade do |t|
     t.string "city"
     t.integer "user_id"
-    t.integer "public_rating"
+    t.float "public_rating"
     t.boolean "private"
     t.integer "user_rating"
     t.integer "days_count"

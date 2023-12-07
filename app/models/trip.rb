@@ -7,7 +7,7 @@
 #  days_count    :integer
 #  events_count  :integer
 #  private       :boolean
-#  public_rating :integer
+#  public_rating :float
 #  ratings_count :integer
 #  user_rating   :integer
 #  created_at    :datetime         not null

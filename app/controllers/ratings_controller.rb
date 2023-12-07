@@ -35,7 +35,7 @@ class RatingsController < ApplicationController
     user_rating = Rating.where({ :user_id => current_user.id }).where({ :trip_id => params.fetch("query_trip_id")}).first
     
     associated_trip = Trip.where({:id => params.fetch("query_trip_id")}).first
-
+  #if the user doing the rating hasnt created a rating for this trip yet
     if user_rating == nil
       the_rating = Rating.new
       the_rating.user_id = current_user.id
@@ -66,6 +66,8 @@ class RatingsController < ApplicationController
       else
         redirect_to("/ratings", { :alert => the_rating.errors.full_messages.to_sentence })
       end
+  #if the user has already rated this trip
+
     else
               
       user_rating.user_id = current_user.id
@@ -74,7 +76,7 @@ class RatingsController < ApplicationController
       
       trip_id = params.fetch("query_trip_id")
 
-      matching_ratings = Rating.where({ :trip_id => trip_id }).where("value IS NOT NULL")
+      matching_ratings = Rating.where({ :trip_id => trip_id }).where.not({ :user_id => current_user.id })
   
       @list_of_ratings = matching_ratings.order({ :created_at => :desc })
 
