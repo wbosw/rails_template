@@ -31,14 +31,11 @@
         <input type="text" id="user_id_box" name="query_user_id" value="<%= current_user.id %>">
       </div>
 
-  
-
       <div>
         <input type="checkbox" id="private_box" name="query_private" value="1">
 
         <label for="private_box">Private</label>
       </div>
-
 
       <button>
         Create trip
@@ -52,16 +49,9 @@
   <div>
     <table border="1">
       <tr>
-        <th>
-          ID
-        </th>
-
+      
         <th>
           City
-        </th>
-
-        <th>
-          User
         </th>
 
         <th>
@@ -73,7 +63,7 @@
         </th>
 
         <th>
-          User rating
+          My rating
         </th>
 
         <th>
@@ -101,56 +91,53 @@
       </tr>
 
       <% @list_of_trips.where( :user_id => current_user.id ).each do |a_trip| %>
-      <tr>
-        <td>
-          <%= a_trip.id %>
-        </td>
+        <tr>
+          
+          <td>
+            <%= a_trip.city %>
+          </td>
 
-        <td>
-          <%= a_trip.city %>
-        </td>
+          <td>
+            <%= a_trip.public_rating %>
+          </td>
 
-        <td>
-          <%= a_trip.user_id %>
-        </td>
+          <td>
+            <%if a_trip.private %>
+              Private
+            <%else%>
+              Public
+            <%end%>
+          </td>
 
-        <td>
-          <%= a_trip.public_rating %>
-        </td>
+          <td>
+            <%= a_trip.user_rating %>
+          </td>
 
-        <td>
-          <%= a_trip.private %>
-        </td>
+          <td>
+            <%= a_trip.days_count %>
+          </td>
 
-        <td>
-          <%= a_trip.user_rating %>
-        </td>
+          <td>
+            <%= a_trip.events_count %>
+          </td>
 
-        <td>
-          <%= a_trip.days_count %>
-        </td>
+          <td>
+            <%= a_trip.ratings_count %>
+          </td>
 
-        <td>
-          <%= a_trip.events_count %>
-        </td>
+          <td>
+            <%= time_ago_in_words(a_trip.created_at) %> ago
+          </td>
+          <td>
+            <%= time_ago_in_words(a_trip.updated_at) %> ago
+          </td>
 
-        <td>
-          <%= a_trip.ratings_count %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_trip.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_trip.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/trips/<%= a_trip.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
+          <td>
+            <a href="/trips/<%= a_trip.id %>">
+              Show details
+            </a>
+          </td>
+        </tr>
       <% end %>
     </table>
   </div>
