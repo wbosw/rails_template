@@ -39,7 +39,7 @@ class TripsController < ApplicationController
     the_trip.city = params.fetch("query_city")
     the_trip.user_id = params.fetch("query_user_id")
     the_trip.private = params.fetch("query_private", false)
-    
+  
 
     if the_trip.valid?
       the_trip.save
