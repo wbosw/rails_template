@@ -54,17 +54,17 @@ Rails.application.routes.draw do
   # post("/insert_rating", { :controller => "ratings", :action => "create" })
           
   post("/insert_rating2", { :controller => "ratings", :action => "create2" })
-  # READ
-  get("/ratings", { :controller => "ratings", :action => "index" })
+  # # READ
+  # get("/ratings", { :controller => "ratings", :action => "index" })
   
-  get("/ratings/:path_id", { :controller => "ratings", :action => "show" })
+  # get("/ratings/:path_id", { :controller => "ratings", :action => "show" })
   
   # UPDATE
   
   post("/modify_rating/:path_id", { :controller => "ratings", :action => "update" })
   
   # DELETE
-  get("/delete_rating/:path_id", { :controller => "ratings", :action => "destroy" })
+  # get("/delete_rating/:path_id", { :controller => "ratings", :action => "destroy" })
 
   #------------------------------
 
