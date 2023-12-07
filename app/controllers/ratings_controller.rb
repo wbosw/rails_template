@@ -34,17 +34,20 @@ class RatingsController < ApplicationController
   def create2
     user_rating = Rating.where({ :user_id => current_user.id }).where({ :trip_id => params.fetch("query_trip_id")}).first
     
-    # associated_trip = Trip.where({})
+    # associated_trip = Trip.where({:id => params.fetch("query_trip_id")}).first
+
     if user_rating == nil
       the_rating = Rating.new
       the_rating.user_id = current_user.id
       the_rating.value = params.fetch("query_value")
       the_rating.trip_id = params.fetch("query_trip_id")
       
+      # associated_trip.ratings_count = 100
 
 
       if the_rating.valid?
         the_rating.save
+        # associated_trip.save
         redirect_to("/trips/#{the_rating.trip_id}", { :notice => "Rating created successfully." })
       else
         redirect_to("/ratings", { :alert => the_rating.errors.full_messages.to_sentence })

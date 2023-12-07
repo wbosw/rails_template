@@ -107,7 +107,9 @@
           </td>
 
           <td>
-            <%= a_trip.user_rating %>
+          <%if a_trip.ratings.where({ :trip_id => a_trip.id}).first != nil %>
+            <%= a_trip.ratings.where({ :trip_id => a_trip.id}).first.value %>
+            <%end%>
           </td>
 
           <td>
