@@ -47,7 +47,9 @@
         My rating:
       </dt>
       <dd>
-        <%= @the_trip.user_rating %>
+           <%if @the_trip.ratings.where({ :trip_id => @the_trip.id}).where({ :user_id => @the_trip.user_id}).first != nil %>
+              <%= @the_trip.ratings.where({ :trip_id => @the_trip.id}).where({ :user_id => @the_trip.user_id}).first.value %>
+            <%end%>/ 5
       </dd>
 
       <dt>
@@ -106,7 +108,7 @@
           <option value=2>2</option>
           <option value=1>1</option>
         </select>
-        /5
+        / 5
       </div>
       <button>Submit Rating</button>
     </form>
@@ -237,7 +239,7 @@
 <% if @list_of_days != nil%>
   <div>
     <div>
-      <table border="1">
+      <table border="1" class="table table-striped">
         <tr>
 
           <th>
