@@ -9,8 +9,8 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
-<!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.css">-->
-  <body>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.css">
+  <body class="margin" >
  
        <nav>
       <a href="/">Home</a>
@@ -44,4 +44,7 @@
 
     <%= yield %>
   </body>
+  <style>
+  .margin {padding: 8px;}
+  <style>
 </html>
