@@ -37,10 +37,11 @@ class EventsController < ApplicationController
     the_id = params.fetch("path_id")
     the_event = Event.where({ :id => the_id }).at(0)
 
+    the_event.name = params.fetch("query_name")
     the_event.day_id = params.fetch("query_day_id")
     the_event.notes = params.fetch("query_notes")
     the_event.trip_id = params.fetch("query_trip_id")
-    the_event.time = params.fetch("query_time")
+    # the_event.time = params.fetch("query_time")
 
     if the_event.valid?
       the_event.save
@@ -54,8 +55,10 @@ class EventsController < ApplicationController
     the_id = params.fetch("path_id")
     the_event = Event.where({ :id => the_id }).at(0)
 
+    trip_id = the_event.trip.id
+
     the_event.destroy
 
-    redirect_to("/events", { :notice => "Event deleted successfully."} )
+    redirect_to("/trips//#{trip_id}", { :notice => "Event deleted successfully."} )
   end
 end

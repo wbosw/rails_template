@@ -57,11 +57,14 @@ class DaysController < ApplicationController
   end
 
   def destroy
+  
     the_id = params.fetch("path_id")
     the_day = Day.where({ :id => the_id }).at(0)
 
+    trip_id = the_day.trip.id
+
     the_day.destroy
 
-    redirect_to("/days", { :notice => "Day deleted successfully."} )
+    redirect_to("/trips/#{trip_id}", { :notice => "Day deleted successfully."} )
   end
 end
