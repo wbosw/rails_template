@@ -118,7 +118,11 @@
           </td>
 
           <td>
+          <% if a_trip.private == true %>
+            N/A
+          <% else %>
             <%= a_trip.public_rating %>
+            <% end %>
           </td>
 
           <td>

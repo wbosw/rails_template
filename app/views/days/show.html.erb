@@ -143,7 +143,7 @@
         </div>
         <div>
           <label for="name_box">
-            Name
+            Event Name:
           </label>
 
           <input type="text" id="name_box" name="query_name">
@@ -151,7 +151,7 @@
 
         <div>
           <label for="notes_box">
-            Notes
+            Notes:
           </label>
 
           <input type="text" id="notes_box" name="query_notes">
@@ -162,11 +162,11 @@
         </div>
 
         <div>
-          <label for="time_box">
+         <!-- <label for="time_box">
             Time
           </label>
 
-          <input type="datetime-local" id="time_box" name="query_time">
+          <input type="datetime-local" id="time_box" name="query_time">-->
         </div>
 
         <button>
@@ -184,14 +184,7 @@
     <div>
       <table border="1">
         <tr>
-          <th>
-            ID
-          </th>
-
-          <th>
-            Day
-          </th>
-
+          
           <th>
             Name
           </th>
@@ -204,9 +197,9 @@
             Trip
           </th>
 
-          <th>
+    <!--      <th>
             Time
-          </th>
+          </th>-->
 
           <th>
             Created at
@@ -222,14 +215,7 @@
 
         <% @list_of_events.each do |an_event| %>
           <tr>
-            <td>
-              <%= an_event.id %>
-            </td>
-
-            <td>
-              <%= an_event.day_id %>
-            </td>
-
+            
             <td>
               <%= an_event.name %>
             </td>
@@ -242,10 +228,10 @@
               <%= an_event.trip_id %>
             </td>
 
-            <td>
-              <%= an_event.time %>
-            </td>
-
+       <!--     <td>-->
+              <%#= an_event.time %>
+<!--            </td>
+-->
             <td>
               <%= time_ago_in_words(an_event.created_at) %> ago
             </td>

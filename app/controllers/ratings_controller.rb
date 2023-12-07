@@ -56,7 +56,7 @@ class RatingsController < ApplicationController
       sum_ratings = sum_ratings + a_rating.value
       end
 
-      associated_trip.public_rating = (sum_ratings.to_f + the_rating.value) / ratings_count.to_f
+      associated_trip.public_rating = ((sum_ratings.to_f + the_rating.value) / ratings_count.to_f).round(1)
 
       if the_rating.valid?
         the_rating.save
@@ -88,7 +88,7 @@ class RatingsController < ApplicationController
       sum_ratings = sum_ratings + a_rating.value
       end
 
-      associated_trip.public_rating = (sum_ratings.to_f + user_rating.value) / ratings_count.to_f
+      associated_trip.public_rating = ((sum_ratings.to_f + user_rating.value) / ratings_count.to_f).round(1)
 
       if user_rating.valid?
         user_rating.save

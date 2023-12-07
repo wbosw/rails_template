@@ -23,13 +23,13 @@ class EventsController < ApplicationController
     the_event.day_id = params.fetch("query_day_id")
     the_event.notes = params.fetch("query_notes")
     the_event.trip_id = params.fetch("query_trip_id")
-    the_event.time = params.fetch("query_time")
+    # the_event.time = params.fetch("query_time")
 
     if the_event.valid?
       the_event.save
       redirect_to("/trips/#{the_event.trip_id}/days/#{the_event.day_id}", { :notice => "Event created successfully." })
     else
-      redirect_to("/events", { :alert => the_event.errors.full_messages.to_sentence })
+      redirect_to("/trips/#{the_event.trip_id}/days/#{the_event.day_id}", { :alert => the_event.errors.full_messages.to_sentence })
     end
   end
 

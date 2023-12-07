@@ -16,7 +16,8 @@ class TripsController < ApplicationController
 
     matching_days = Day.all.where({ :trip_id => @the_trip.id })
 
-    @list_of_days = matching_days.order({ :created_at => :desc }) 
+    @list_of_days = matching_days.order({ :Date => :asc}) 
+    
     render({ :template => "trips/show" })
   end
 
@@ -29,7 +30,7 @@ class TripsController < ApplicationController
 
     matching_days = Day.all.where({ :trip_id => @the_trip.id })
 
-    @list_of_days = matching_days.order({ :created_at => :desc })
+    @list_of_days = matching_days.order({ :Date => :asc })
 
     render({ :template => "days/index" })
   end
