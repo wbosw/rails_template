@@ -4,13 +4,16 @@
       <%= @the_event.name %> details
     </h1>
 
-         <div>
+<% if current_user == nil %>
+
+<% elsif current_user.id == @the_event.trip.user.id %>
+           <div>
         <a href="/delete_event/<%= @the_event.id %>">
           Delete event
         </a>
       </div>
     </div>
-
+<% end %>
     <dl>
    
       
@@ -44,7 +47,9 @@
 
 <hr>
 
+<% if current_user == nil %>
 
+<% elsif current_user.id == @the_event.trip.user.id %>
 <div>
   <div>
     <h2>
@@ -94,3 +99,5 @@
 </div>
 
 <hr>
+
+<% end %>
